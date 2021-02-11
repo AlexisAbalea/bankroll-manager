@@ -1,0 +1,17 @@
+.navbar {
+  width: 100%;
+  height: 65px;
+  background-color: rgba(247, 40, 40, 0.884);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .logo {
+    margin-left: 20px;
+    margin-top: 15px;
+  }
+  .login {
+    margin-right: 15px;
+  }
+}
+
