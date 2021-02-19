@@ -1,10 +1,88 @@
+h1 {
+  font-weight: bold;
+  font-size: 23pt;
+  color: rgb(253, 84, 84);
+}
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 80vh;
 }
-.gameContainer {
-  margin-top: 15px;
+
+.header-games {
+  display: flex;
   width: 80%;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.titre-bankroll {
+  color: rgba(73, 73, 247, 0.849);
+}
+
+.tableau-parties {
+  width: 80%;
+  overflow-x:auto;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin-top: 25px;
+}
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12pt;
+}
+
+td, th {
+  padding: 8px;
+  text-align: center;
+}
+
+tr {
+  line-height: 40px;
+}
+.tr-liste:nth-child(even){background-color: #eeeeee;}
+
+.tr-liste:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  font-weight: lighter;
+  color: rgba(121, 117, 117, 0.911);
+}
+
+.add-game {
+  line-height: 80px;
+}
+
+.input-form-add {
+  width: 130px;
+  font-size: 11pt;
+}
+
+.select-form-add {
+  width: 200px;
+  font-size: 11pt;
+}
+
+.disabled-style {
+  color: black;
+}
+
+.menu-td {
+  display: flex;
+  justify-content: center;
+  div {
+    margin-right: 10px;
+  }
+}
+
+.transfert-background {
+  font-style: italic;
+  font-weight: 600;
 }

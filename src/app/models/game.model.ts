@@ -1,17 +1,19 @@
-import * as dayjs from 'dayjs'
 
 export class Game {
-  date: String;
+  date: Date;
   typeGame: String;
   entree: number;
   sortie: number;
   resultat: number;
+  isTransfert: boolean;
 
-  constructor(date: String, typeGame: String, entree: number, sortie: number) {
+  constructor(date: Date, typeGame: String, entree: number, sortie: number, isTransfert: boolean) {
     this.date = date;
     this.typeGame = typeGame;
     this.entree = entree;
     this.sortie = sortie;
-    this.resultat = sortie - entree;
+    const resultat = sortie - entree;
+    this.resultat  = Math.round(resultat * 100) / 100;
+    this.isTransfert = isTransfert;
   }
 }

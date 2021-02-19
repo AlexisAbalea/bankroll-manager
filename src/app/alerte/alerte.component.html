@@ -1,0 +1,32 @@
+<div class="alerte-container">
+  <mat-card class="ajouter-alerte">
+    <h1>Ajouter une alerte</h1>
+    <p>Ajouter une alerte qui vous previendra lorsque la bankroll atteindra ce montant.</p>
+    <mat-form-field class="form-add">
+      <input placeholder="Titre" [(ngModel)]="titre" type="text" matInput value="">
+    </mat-form-field>
+    <mat-form-field class="form-add">
+      <input placeholder="Montant" [(ngModel)]="montant" type="number" matInput value="">
+    </mat-form-field>
+    <mat-form-field class="form-add">
+      <input placeholder="Commentaire" [(ngModel)]="commentaire" type="text" matInput value="">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="form-add" (click)="ajouterAlerte()">Ajouter</button>
+  </mat-card>
+  <div class="tableau-alerte">
+    <h2>Mes alertes</h2>
+    <mat-card *ngFor="let alerte of listeAlerte" class="card-container">
+      <div class="montant">
+        {{ alerte.montant }}€
+      </div>
+      <div class="description">
+        <div class="titre">
+          {{ alerte.titre }}
+        </div>
+        <div class="commentaire">
+          {{alerte.commentaire}}
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

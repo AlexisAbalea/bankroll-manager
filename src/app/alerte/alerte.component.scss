@@ -1,0 +1,45 @@
+.alerte-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.ajouter-alerte {
+  margin: 70px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tableau-alerte {
+  width: 50%;
+}
+
+h1 {
+  font-size: 18pt;
+}
+
+.form-add {
+  width: 200px;
+}
+
+.card-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+.montant {
+  font-size: 15pt;
+  font-weight: 600;
+}
+
+.description {
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  .titre {
+    font-size: 13pt;
+  }
+}

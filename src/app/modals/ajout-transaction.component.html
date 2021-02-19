@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 mat-dialog-title>Ajouter / Retirer de la bankroll</h1>
+  <div mat-dialog-content class="contenu-dialog">
+    <mat-form-field appearance="fill" class="select-form-add">
+      <mat-label>Date de la transaction</mat-label>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="date" disabled  class="disabled-style">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+    <div class="slider">
+      <div>Dépôt</div>
+      <div><mat-slide-toggle [(ngModel)]="isChecked"></mat-slide-toggle></div>
+      <div>Retrait</div>
+    </div>
+    <div>
+      <mat-form-field [ngStyle]="{'color': isChecked ? 'green' : 'red'}"  class="taille-input">
+        <mat-label>Montant :</mat-label>
+          <span matPrefix *ngIf="!isChecked" class="ajouter-montant">+ &nbsp;</span>
+          <span matPrefix *ngIf="isChecked" class="ajouter-montant">- &nbsp;</span>
+          <input matInput type="number" [(ngModel)]="data" class="ajouter-montant">
+      </mat-form-field>
+      <span>€</span>
+    </div>
+  </div>
+  <div mat-dialog-actions class="bouton-action">
+    <button mat-button (click)="onNoClick()">Annuler</button>
+    <button mat-raised-button [mat-dialog-close]="{data: data, date: date, isChecked: isChecked}"  color="primary" cdkFocusInitial>Valider</button>
+  </div>
+</div>
