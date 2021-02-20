@@ -27,6 +27,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { AjoutTransactionDialog } from './modals/ajout-transaction.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AlerteComponent } from './alerte/alerte.component';
+import { LoginComponent } from './login/login.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { AlerteComponent } from './alerte/alerte.component';
     GraphiqueLineaireComponent,
     ChiffresCleComponent,
     AjoutTransactionDialog,
-    AlerteComponent
+    AlerteComponent,
+    LoginComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
