@@ -31,9 +31,9 @@ export class LoginComponent implements OnInit {
       try {
         const username = this.form.get('username').value;
         const password = this.form.get('password').value;
-        this.authService.login(username, password).then(log => {
-          this.router.navigate(['accueil']);
-        });
+        //this.authService.login(username, password).then(log => {
+          // this.router.navigate(['accueil']);
+        //});
       } catch (err) {
         this.loginInvalid = true;
       }

@@ -2,30 +2,94 @@ import { Injectable } from '@angular/core';
 import { Game } from '../models/game.model';
 import { Serie, Stats } from '../models/stats.model';
 import * as dayjs from 'dayjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Bankroll } from '../models/bankroll.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BankrollService {
 
-  bankroll: Game[] = [];
+  SERVER = environment.urlAddress;
+  bankroll: Bankroll;
   miseDepart: number;
+  listeBankroll: Bankroll[] = [];
 
-  constructor() {
-    this.addMockGame();
+  constructor(private http: HttpClient) {
+
   }
 
-  addBankroll(newGame: Game) {
-    this.bankroll.push(newGame);
-    this.bankroll = this.sortDateDecroissant(this.bankroll);
+  /* ************* BANKROLL ********************* */
+
+  getBankroll(userId): Observable<any> {
+    return this.http.get(this.SERVER + '/api/bankroll/' + userId);
   }
+
+  createBankrollBdd(bankroll: Bankroll) {
+    return new Promise<any>((resolve, reject) => {
+      this.http.post<any>(this.SERVER + '/api/bankroll', { bankroll: bankroll })
+        .subscribe(retour => {
+            if (retour.id) {
+              bankroll.id = retour.id;
+              this.listeBankroll.push(bankroll);
+            }
+            resolve(retour);
+          }, (error) => {
+            reject(error);
+          }
+        );
+    });
+  }
+
+  deleteBankrollBdd(id) {
+    return new Promise<void>((resolve, reject) => {
+      this.http.delete(this.SERVER + '/api/bankroll/' + id)
+        .subscribe((retour) => {
+            resolve();
+          }, (error) => {
+            reject(error);
+          }
+        );
+    });
+  }
+
+  /* ************* GAMES ********************* */
+
+  getGamesFromBankroll() {
+    return this.http.get(this.SERVER + '/api/games/' + this.bankroll.id);
+  }
+
+  addGame(newGame: Game) {
+    return this.http.post<any>(this.SERVER + '/api/games', newGame);
+  }
+
+  deleteGame(idGame: string) {
+    return this.http.delete(this.SERVER + '/api/games/' + idGame);
+  }
+
+  updateGame(game: Game) {
+    return this.http.patch(this.SERVER + '/api/games/', {game: game});
+  }
+
+  setGameFromBdd(valeur) {
+    valeur.forEach(element => {
+      const game = new Game(new Date(element.date), element.type, element.entree, element.sortie, element.isTransfert, element.idBankroll);
+      game.id = element.id;
+      this.bankroll.games.push(game);
+    });
+  }
+
+
+  /* ************* UTILITAIRE ********************* */
 
   fromGameToStats(): Stats {
     const stats: Stats = new Stats();
     stats.name = '€';
     stats.series = [];
-    if (this.bankroll && this.bankroll.length) {
-      const listeGame = this.sortDateCroissant(this.bankroll);
+    if (this.bankroll && this.bankroll.games.length) {
+      const listeGame = this.sortDateCroissant(this.bankroll.games);
       let value = 0;
       listeGame.forEach(game => {
         const serie = new Serie();
@@ -39,37 +103,28 @@ export class BankrollService {
   }
 
   sortDateDecroissant(array: Game[]) {
-   return array.sort((a, b) => { return b.date.getTime() - a.date.getTime()});
+   return array.sort((a, b) => {
+     if (b.date.getTime() === a.date.getTime()) {
+       console.log('time egale');
+       return parseInt(a.id) - parseInt(b.id);
+     }
+     return b.date.getTime() - a.date.getTime()
+    });
   }
 
   sortDateCroissant(array: Game[]) {
     return array.sort((a, b) => { return a.date.getTime() - b.date.getTime()});
   }
 
-
-  addMockGame() {
-    let gameMock = new Game(new Date(2016,1,1), 'Dépôt', 0, 150, true);
-    let gameMock1 = new Game(new Date(2017, 2, 5), 'Tournois', 10, 15.50, false);
-    let gameMock2 = new Game(new Date(2018, 3, 5), 'Cash game', 13.50, 8.21, false);
-    let gameMock3 = new Game(new Date(2019, 4, 5), 'Cash game', 10, 9.21, false);
-    let gameMock4 = new Game(new Date(2020, 1, 1 ), 'Tournois', 35, 21, false);
-    let gameMock5 = new Game(new Date(2020, 3, 5), 'Cash game', 40, 150, false);
-    let gameMock6 = new Game(new Date(2021, 1, 1), 'Cash game', 30, 60, false);
-    let gameMock7 = new Game(new Date(2021, 2, 16), 'Retrait', 20, 0, true);
-    const mockGames = [gameMock, gameMock1, gameMock2, gameMock3, gameMock4, gameMock5, gameMock6, gameMock7];
-    this.bankroll.push(...mockGames);
-    this.bankroll = this.sortDateDecroissant(this.bankroll);
-  }
-
-  getMontantInvesti(bankroll: Game[]): number {
-    const bankrollTransfert = bankroll.filter(val => {
+  getMontantInvesti(games: Game[]): number {
+    const bankrollTransfert = games.filter(val => {
       return val.isTransfert && val.sortie > 0;
     });
     return bankrollTransfert.reduce((a, b) => a + b.sortie, 0);
   }
 
-  getMontantBankroll(bankroll: Game[]): number {
-    return bankroll.reduce((a, b) => a + b.resultat, 0);
+  getMontantBankroll(games: Game[]): number {
+    return games.reduce((a, b) => a + b.resultat, 0);
   }
 
 }

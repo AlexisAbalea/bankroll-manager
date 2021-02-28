@@ -1,0 +1,21 @@
+
+
+.nom {
+  font-size: 18pt;
+}
+
+.description {
+  font-size: 11pt;
+  font-weight: 300;
+  font-style: italic;
+}
+.objectif {
+  text-align: end;
+  font-size: 14pt;
+  font-weight: 500;
+  .icon-cible {
+    font-size: 14pt;
+    color: rgb(6, 138, 6);
+    text-align: end;
+  }
+}

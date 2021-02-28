@@ -24,11 +24,15 @@ import { FormsModule } from '@angular/forms';
 import { GraphiqueLineaireComponent } from './statistiques/graphique-lineaire/graphique-lineaire.component';
 import { ChiffresCleComponent } from './statistiques/chiffres-cle/chiffres-cle.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AjoutTransactionDialog } from './modals/ajout-transaction.component';
+import { AjoutTransactionDialog } from './modals/modal-transaction/ajout-transaction.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AlerteComponent } from './alerte/alerte.component';
 import { LoginComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BankrollMenuComponent } from './bankroll-menu/bankroll-menu.component';
+import { CardBankrollComponent } from './bankroll-menu/card-bankroll/card-bankroll.component';
+import { ModalSuppressionComponent } from './modals/modal-suppression/modal-suppression.component';
 
 
 @NgModule({
@@ -42,7 +46,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     AjoutTransactionDialog,
     AlerteComponent,
     LoginComponent,
-    SidebarComponent
+    SidebarComponent,
+    BankrollMenuComponent,
+    CardBankrollComponent,
+    ModalSuppressionComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     NgxChartsModule,
     FormsModule,
     MatDialogModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    HttpClientModule
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

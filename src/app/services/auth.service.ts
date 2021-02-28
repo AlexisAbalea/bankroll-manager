@@ -1,47 +1,16 @@
 import { Injectable } from '@angular/core';
-import * as firebase from 'firebase';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
-
-  createNewUser(email: string, password: string) {
-    return new Promise<void>(
-      (resolve, reject) => {
-        firebase.default.auth().createUserWithEmailAndPassword(email, password).then(
-          () => {
-            resolve();
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
+  user: User = new User();
+  constructor() {
+    this.user.id = "1";
   }
 
-  login(email: string, password: string) {
-    return new Promise<void>(
-      (resolve, reject) => {
-        firebase.default.auth().signInWithEmailAndPassword(email, password).then(
-          () => {
-            resolve();
-            console.log('succes');
-          },
-          (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
-  }
-
-  signOutUser() {
-    firebase.default.auth().signOut();
-  }
 }
 
 

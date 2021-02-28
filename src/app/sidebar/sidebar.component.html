@@ -3,16 +3,23 @@
     <mat-nav-list class="list-navbar">
 
       <a mat-list-item
-        [routerLink]="'/games'"
-        routerLinkActive="is-active">Bankroll</a>
+        [routerLink]="'/bm/bankroll'"
+        routerLinkActive="is-active">Mes bankrolls</a>
 
       <a mat-list-item
-        [routerLink]="'/stats'"
-        routerLinkActive="is-active">Statistiques</a>
+        [routerLink]="'/bm/games'"
+        routerLinkActive="is-active"
+        *ngIf="hasBankrollChoose()">Mes parties</a>
+
+      <a mat-list-item
+        [routerLink]="'/bm/stats'"
+        routerLinkActive="is-active"
+        *ngIf="hasBankrollChoose()">Statistiques</a>
 
         <a mat-list-item
-        [routerLink]="'/alerte'"
-        routerLinkActive="is-active">Alertes</a>
+        [routerLink]="'/bm/alerte'"
+        routerLinkActive="is-active"
+        *ngIf="hasBankrollChoose()">Alertes</a>
 
     </mat-nav-list>
   </mat-drawer>

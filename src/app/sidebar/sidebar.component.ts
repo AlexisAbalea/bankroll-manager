@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BankrollService } from '../services/bankroll.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bankrollService :BankrollService) { }
 
   ngOnInit(): void {
+  }
+
+  hasBankrollChoose() {
+    return this.bankrollService.bankroll;
   }
 
 }

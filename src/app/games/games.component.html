@@ -1,6 +1,6 @@
 <div class="container">
   <div class="header-games">
-    <h1>MA BANKROLL - <span class="titre-bankroll">{{bankroll}} €</span></h1>
+    <h1>Montant bankroll : <span class="titre-bankroll">{{ montantBankroll }} €</span></h1>
     <div class="transaction">
       <button mat-raised-button color="primary" (click)="openDialog()">Dépôt/Retrait <mat-icon>swap_horiz</mat-icon></button>
     </div>
@@ -80,17 +80,17 @@
               <mat-icon>more_vert</mat-icon>
             </button>
           </td>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>create</mat-icon>
+              <span>Modifier</span>
+            </button>
+            <button mat-menu-item (click)="openDialogSuppression(game)">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </mat-menu>
         </tr>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon>create</mat-icon>
-            <span>Modifier</span>
-          </button>
-          <button mat-menu-item>
-            <mat-icon>delete</mat-icon>
-            <span>Supprimer</span>
-          </button>
-        </mat-menu>
       </tbody>
     </table>
   </div>

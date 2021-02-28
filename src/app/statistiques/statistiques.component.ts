@@ -21,7 +21,7 @@ export class StatistiquesComponent implements OnInit {
   }
 
   getDataChiffre(): Serie[] {
-    const bankroll = this.bankrollService.bankroll;
+    const bankroll = this.bankrollService.bankroll.games;
     const listeSeries: Serie[] = [];
     if (bankroll && bankroll.length > 0) {
       listeSeries.push(this.getNbrPartie(bankroll));

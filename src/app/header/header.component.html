@@ -1,6 +1,8 @@
 <div class="navbar">
-  <div class="logo">
-    <h1>Bankroll Manager</h1>
+  <div class="logo" [routerLink]="['']">
+    <h1>Bankrolleur</h1>
   </div>
+  <div class="titre-bankroll" *ngIf="titreBankroll">{{ titreBankroll }}</div>
+
   <div class="login">Mon profile</div>
 </div>

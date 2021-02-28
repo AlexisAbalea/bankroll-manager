@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AjoutTransactionDialog } from '../modals/ajout-transaction.component';
+import { ModalSuppressionComponent } from '../modals/modal-suppression/modal-suppression.component';
+import { AjoutTransactionDialog } from '../modals/modal-transaction/ajout-transaction.component';
+import { Bankroll } from '../models/bankroll.model';
 import { Game } from '../models/game.model';
 import { BankrollService } from '../services/bankroll.service';
 
@@ -13,9 +15,10 @@ import { BankrollService } from '../services/bankroll.service';
 })
 export class GamesComponent implements OnInit {
 
+  bankroll: Bankroll;
   gameForm: FormGroup;
   ajouterClicked: boolean;
-  bankroll: number;
+  montantBankroll: number;
 
   games: Game[] = [];
   types = ['Tournois', 'Cash game'];
@@ -28,8 +31,8 @@ export class GamesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.bankroll = this.serviceBankroll.bankroll;
     this.getGames();
-    this.majMontant();
     this.initForm();
   }
 
@@ -52,20 +55,38 @@ export class GamesComponent implements OnInit {
         formValue['type'],
         formValue['miseEntree'],
         formValue['miseSortie'],
-        false
+        false,
+        this.serviceBankroll.bankroll.id
       );
-      this.serviceBankroll.addBankroll(newGame);
-      this.majMontant();
+      this.serviceBankroll.addGame(newGame).subscribe(retour => {
+        newGame.id = retour.id;
+        this.serviceBankroll.bankroll.games.push(newGame);
+        this.serviceBankroll.bankroll.games = this.serviceBankroll.sortDateDecroissant(this.serviceBankroll.bankroll.games);
+        this.majMontant();
+      }, error => {
+        console.log(error);
+      });
       this.gameForm.reset();
     }
   }
 
   getGames() {
-    this.games = this.serviceBankroll.sortDateDecroissant(this.serviceBankroll.bankroll);
+    if (this.serviceBankroll.bankroll.games.length > 0) {
+      this.games = this.serviceBankroll.sortDateDecroissant(this.serviceBankroll.bankroll.games);
+      this.majMontant();
+    } else {
+      this.serviceBankroll.getGamesFromBankroll().subscribe(val => {
+        if (val) {
+          this.serviceBankroll.setGameFromBdd(val);
+          this.games = this.serviceBankroll.sortDateDecroissant(this.serviceBankroll.bankroll.games);
+          this.majMontant();
+        }
+      });
+    }
   }
 
   majMontant() {
-    this.bankroll = this.serviceBankroll.getMontantBankroll(this.games);
+    this.montantBankroll = this.serviceBankroll.getMontantBankroll(this.games);
   }
 
   formatDate(date) {
@@ -87,10 +108,17 @@ export class GamesComponent implements OnInit {
         result.isChecked ? 'Retrait' : 'Dépôt',
         result.isChecked ? result.data : 0,
         result.isChecked ? 0 : result.data,
-        true
+        true,
+        this.serviceBankroll.bankroll.id
       );
-      this.serviceBankroll.addBankroll(transaction);
-      this.majMontant();
+      this.serviceBankroll.addGame(transaction).subscribe(retour => {
+        transaction.id = retour.id;
+        this.serviceBankroll.bankroll.games.push(transaction);
+        this.serviceBankroll.bankroll.games = this.serviceBankroll.sortDateDecroissant(this.serviceBankroll.bankroll.games);
+        this.majMontant();
+      }, error => {
+        console.log(error);
+      });
     }
   }
 
@@ -104,9 +132,38 @@ export class GamesComponent implements OnInit {
       this.ajouterTransaction(result);
     });
   }
+
+  openDialogSuppression(game: Game): void {
+    console.log(game);
+    const dialogRef = this.dialog.open(ModalSuppressionComponent, {
+      width: '320px',
+      height: '150px',
+      data: {
+        id: game.id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.id) {
+        this.supprimerGame(result.id);
+      }
+    });
+  }
+
+  supprimerGame(id: string) {
+    this.serviceBankroll.deleteGame(id).subscribe(val => {
+      this.games = this.games.filter(x => {
+        return x.id !== id;
+      });
+      this.serviceBankroll.bankroll.games = this.games;
+    }, err => {
+      console.log('echec de la suppression');
+    });
+  }
 }
 
 export interface DialogData {
+  id: string;
   data: number;
   date: Date;
   isChecked: boolean;
