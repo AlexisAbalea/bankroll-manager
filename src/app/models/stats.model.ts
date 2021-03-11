@@ -5,6 +5,6 @@ export class Stats {
 }
 
 export class Serie {
-  name: String;
+  name: Date | string;
   value: number;
 }

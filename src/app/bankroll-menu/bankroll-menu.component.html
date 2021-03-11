@@ -1,7 +1,7 @@
 <div class="container">
   <h1>MES BANKROLLS</h1>
   <div class="bankroll">
-    <div>
+    <div class="form-bankroll">
       <mat-card class="form-bankroll"  [formGroup]="bankrollForm">
         <h2>Ajouter une bankroll</h2>
         <mat-form-field>
@@ -14,15 +14,20 @@
           <input type="text" matInput value="" placeholder="Description" formControlName="description">
         </mat-form-field>
         <mat-form-field>
+          <input type="number" matInput value="" placeholder="Mise de départ (ex: 100€)" formControlName="miseDepart">
+        </mat-form-field>
+        <mat-form-field>
           <input type="number" matInput value="" placeholder="Objectif (ex: 150€)" formControlName="objectif">
         </mat-form-field>
         <button mat-raised-button color="primary" (click)="ajouterBankroll()" [disabled]="listeBankroll.length > 10">Ajouter</button>
       </mat-card>
     </div>
-    <app-card-bankroll
-        class="card-bankroll"
-        *ngFor="let bankroll of listeBankroll"
-        [bankroll]=bankroll
-        (click)="chooseBankroll(bankroll)"></app-card-bankroll>
+    <div class="mes-bankroll">
+      <app-card-bankroll
+          class="card-bankroll"
+          *ngFor="let bankroll of listeBankroll"
+          [bankroll]=bankroll
+          (click)="chooseBankroll(bankroll)"></app-card-bankroll>
+    </div>
   </div>
 </div>

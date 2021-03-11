@@ -1,8 +1,12 @@
-.navbar {
-  width: 200px;
-  background-color: rgba(252, 78, 78, 0.986);
+.header {
+  height: 65px;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(252, 78, 78, 0.986);
+}
 .list-navbar {
   a {
     color: white;
@@ -16,4 +20,8 @@
 
 .mat-list-item-content:active {
   background-color: none;
+}
+
+.matdrawer-style {
+  height: calc(100vh - 63px);
 }

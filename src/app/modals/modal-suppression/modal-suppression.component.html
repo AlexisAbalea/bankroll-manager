@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 mat-dialog-title>Supprimer cette partie ?</h1>
+  <h1 mat-dialog-title>Supprimer cette {{ data.titre }} ?</h1>
   <div mat-dialog-actions class="bouton-action">
     <button mat-button (click)="onNoClick()">Annuler</button>
     <button mat-raised-button [mat-dialog-close]="{id: data.id}"  color="primary" cdkFocusInitial>Valider</button>

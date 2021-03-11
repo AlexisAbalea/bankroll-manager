@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Serie, Stats } from 'src/app/models/stats.model';
 
@@ -27,6 +28,18 @@ export class ChiffresCleComponent implements OnInit {
 
   onSelect(event) {
     console.log(event);
+  }
+
+  valueFormat(val) {
+    if (val.label === 'Partie jouée') {
+      return val.value;
+    }
+
+    if (val.label === '% Objectif') {
+      return val.value + '%';
+    }
+
+    return val.value + '€';
   }
 
 }

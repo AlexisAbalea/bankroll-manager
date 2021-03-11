@@ -1,0 +1,41 @@
+<div class="container">
+  <h1 mat-dialog-title>Modifier une partie</h1>
+  <div mat-dialog-content class="contenu-dialog" [formGroup]="gameForm">
+    <mat-form-field appearance="fill" class="select-form-add">
+      <mat-label>Date de la partie</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" disabled  class="disabled-style">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+      <mat-error *ngIf="gameForm.controls.date.hasError('required') && ajouterClicked">
+        Champs incomplet
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="select-form-add">
+      <mat-label>Type de jeu</mat-label>
+      <mat-select name="type" formControlName="typeGame">
+        <mat-option *ngFor="let type of types" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="gameForm.controls.typeGame.hasError('required') && ajouterClicked">
+        Champs incomplet
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-form-add">
+      <input placeholder="Ex : 100€" type="number" matInput value="" formControlName="entree">
+      <mat-error *ngIf="gameForm.controls.entree.hasError('required') && ajouterClicked">
+        Champs incomplet
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="input-form-add">
+      <input placeholder="Ex : 150€" type="number" matInput value="" formControlName="sortie">
+      <mat-error *ngIf="gameForm.controls.sortie.hasError('required') && ajouterClicked">
+        Champs incomplet
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="bouton-action">
+      <button mat-button (click)="onNoClick()">Annuler</button>
+      <button mat-raised-button [mat-dialog-close]="{data: {game: gameForm.value}}"  color="primary" cdkFocusInitial>Valider</button>
+  </div>
+</div>

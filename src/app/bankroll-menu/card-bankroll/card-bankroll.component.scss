@@ -1,4 +1,18 @@
 
+.card {
+  width: 250px;
+  height: 100%;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+.card:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  box-shadow: 8px 5px 4px rgba(253, 84, 84, 0.774);
+}
 
 .nom {
   font-size: 18pt;
@@ -10,12 +24,15 @@
   font-style: italic;
 }
 .objectif {
-  text-align: end;
   font-size: 14pt;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   .icon-cible {
-    font-size: 14pt;
-    color: rgb(6, 138, 6);
+    font-size: 18pt;
+    color: rgb(6, 170, 0);
     text-align: end;
+    vertical-align: auto;
   }
 }

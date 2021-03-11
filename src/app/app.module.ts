@@ -29,11 +29,27 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { AlerteComponent } from './alerte/alerte.component';
 import { LoginComponent } from './login/login.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BankrollMenuComponent } from './bankroll-menu/bankroll-menu.component';
 import { CardBankrollComponent } from './bankroll-menu/card-bankroll/card-bankroll.component';
 import { ModalSuppressionComponent } from './modals/modal-suppression/modal-suppression.component';
+import { ModalParameterBankrollComponent } from './modals/modal-parameter-bankroll/modal-parameter-bankroll.component';
+import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { BankrollService } from './services/bankroll.service';
+import { AuthService } from './services/auth.service';
+import { NgoloKanteInterceptor } from './services/ngolokante.interceptor';
+import { ProfilComponent } from './profil/profil.component';
+import { ReportComponent } from './report/report.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { CustomLinerChartService } from './services/custom-liner-chart.service';
+import { GraphiqueAreaComponent } from './statistiques/graphique-area/graphique-area.component';
+import { ModalModifierGameComponent } from './modals/modal-modifier-game/modal-modifier-game.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -49,7 +65,13 @@ import { ModalSuppressionComponent } from './modals/modal-suppression/modal-supp
     SidebarComponent,
     BankrollMenuComponent,
     CardBankrollComponent,
-    ModalSuppressionComponent
+    ModalSuppressionComponent,
+    ModalParameterBankrollComponent,
+    ProfilComponent,
+    ReportComponent,
+    SnackbarComponent,
+    GraphiqueAreaComponent,
+    ModalModifierGameComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +93,25 @@ import { ModalSuppressionComponent } from './modals/modal-suppression/modal-supp
     FormsModule,
     MatDialogModule,
     MatSlideToggleModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter}}),
+    MatSnackBarModule,
+    MatPaginatorModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [
+    MatDatepickerModule,
+    //JwtHelperService,
+    AuthService,
+    BankrollService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NgoloKanteInterceptor,
+      multi: true
+    },
+    CustomLinerChartService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

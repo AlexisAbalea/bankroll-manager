@@ -1,5 +1,9 @@
 <mat-card class="card">
   <p class="nom">{{ bankroll.nom }}</p>
-  <p class="description">{{ bankroll.description }}</p>
-  <p class="objectif"><mat-icon class="icon-cible">trending_up</mat-icon>{{ bankroll.objectif }}€</p>
+  <p class="description" *ngIf="bankroll.description">{{ bankroll.description }}</p>
+  <div class="objectif">
+    <div *ngIf="bankroll.miseDepart">{{ bankroll.miseDepart }}€</div>
+    <div *ngIf="bankroll.miseDepart && bankroll.objectif"><mat-icon class="icon-cible">arrow_right_alt</mat-icon></div>
+    <div *ngIf="bankroll.objectif">{{ bankroll.objectif }}€</div>
+  </div>
 </mat-card>

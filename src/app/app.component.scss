@@ -1,19 +1,1 @@
-.navbar {
-  width: 200px;
-  background-color: rgba(252, 78, 78, 0.986);
-}
 
-.list-navbar {
-  a {
-    color: white;
-  }
-}
-
-.mat-nav-list a:focus, .is-active {
-  background-color: rgba(97, 97, 97, 0.267);
-  border-radius: 20px;
-}
-
-.mat-list-item-content:active {
-  background-color: none;
-}

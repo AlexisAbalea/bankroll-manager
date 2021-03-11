@@ -1,18 +1,15 @@
 .container {
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
 .bankroll {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   width: 80%;
-  height: 100%;
 }
 
 h1 {
@@ -22,19 +19,15 @@ h1 {
   color: rgb(253, 84, 84);
 }
 
-.card-bankroll {
-    width: 250px;
-    height: 120px;
-    margin-left: 5%;
-    margin-top: 2%;
-  }
+.form-bankroll {
+  width: 10%;
+  margin-right: 15px;
+}
 
-.card-bankroll:hover {
-  cursor: pointer;
-  -webkit-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  transform: scale(1.1);
-  box-shadow: 8px 5px 4px rgba(253, 84, 84, 0.774);
+.mes-bankroll {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .form-bankroll {
@@ -42,4 +35,8 @@ h1 {
   flex-direction: column;
   margin-left: 5%;
   width: 250px;
+}
+
+.card-bankroll {
+  height: 100px;
 }

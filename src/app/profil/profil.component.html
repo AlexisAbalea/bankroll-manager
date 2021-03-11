@@ -1,0 +1,28 @@
+<div class="container">
+  <mat-card>
+    <h1>Mes informations</h1>
+    <div class="form global">
+      <div>Votre email : <span class="infos">{{email}}</span></div>
+      <div>Date de fin d'abonnement : <span class="infos">{{ finAbonnement }}</span></div>
+      <button mat-raised-button (click)="modeChangmtMdp()" color="accent" *ngIf="!modeChgMdp">Modifier votre mot de passe</button>
+      <div *ngIf="modeChgMdp" [formGroup]="form" class="form">
+        <mat-form-field>
+          <mat-label>Ancien mot de passe</mat-label>
+          <input type="text" matInput formControlName="oldPassword">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nouveau mot de passe</mat-label>
+          <input type="text" matInput formControlName="password">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Confirmer nouveau mot de passe</mat-label>
+          <input type="text" matInput formControlName="confirmPassword">
+        </mat-form-field>
+        <button mat-raised-button (click)="modifierMdp()" color="accent" [disabled]="form.invalid">Valider le changement de mot de passe</button>
+      </div>
+    </div>
+    <p>Pour obtenir de l'aide, veuillez contacter par email : <span class="infos">support@bankrolleur.com</span></p>
+  </mat-card>
+</div>

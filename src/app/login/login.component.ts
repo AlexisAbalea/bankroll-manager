@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService,) {}
+    private authService: AuthService) {}
 
   async ngOnInit() {
     this.form = this.fb.group({
@@ -28,15 +28,28 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     this.loginInvalid = false;
     if (this.form.valid) {
-      try {
-        const username = this.form.get('username').value;
-        const password = this.form.get('password').value;
-        //this.authService.login(username, password).then(log => {
-          // this.router.navigate(['accueil']);
-        //});
-      } catch (err) {
-        this.loginInvalid = true;
-      }
+      const username = this.form.get('username').value;
+      const password = this.form.get('password').value;
+      this.authService.login(username, password).subscribe((authData: { token: string, user: any }) => {
+          console.log('retour :', authData);
+          this.authService.user = authData.user;
+          localStorage.setItem('token', authData.token);
+          sessionStorage.setItem('user', JSON.stringify(authData.user));
+          this.authService.token = authData.token;
+          this.router.navigate(['bm/bankroll']);
+        },
+        (error) => {
+          console.log('erreur : ', error);
+        }
+      );
+
+
+      /*then(log => {
+        this.router.navigate(['bm/bankroll']);
+      }).catch(err => {
+        console.log('erreur : ', err);
+      });
+      */
     }
   }
 

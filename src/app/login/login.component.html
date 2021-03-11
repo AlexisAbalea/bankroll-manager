@@ -1,39 +1,28 @@
 <div class="container">
-  <mat-card>
-    <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <h2>Connexion</h2>
-        <mat-error *ngIf="loginInvalid">
-          L'email ou le mot de passe est incorrect
-        </mat-error>
-        <mat-form-field class="full-width-input">
-          <input matInput placeholder="Email" formControlName="username" required>
-          <mat-error>
-            Merci de saisir une adresse email valide
+  <div class="background"></div>
+    <mat-card class="mat-elevation-z8">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <h2>Bankrolleur</h2>
+          <mat-error *ngIf="loginInvalid">
+            L'email ou le mot de passe est incorrect
           </mat-error>
-        </mat-form-field>
-        <mat-form-field class="full-width-input">
-          <input matInput type="password" placeholder="Mot de passe" formControlName="password" required>
-          <mat-error>
-            Merci de saisir un mot de passe
-          </mat-error>
-        </mat-form-field>
-        <button mat-raised-button color="primary" class="hvr-pulse-grow">Connexion</button>
-      </form>
-      <br>
-      <a href="#">Pas de compte ? cliquez ici</a>
-    </mat-card-content>
-  </mat-card>
-  <ul class="background">
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
- </ul>
+          <mat-form-field class="full-width-input">
+            <input matInput type="email" placeholder="Email" formControlName="username" required>
+            <mat-error>
+              Merci de saisir une adresse email valide
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width-input">
+            <input matInput type="password" placeholder="Mot de passe" formControlName="password" required>
+            <mat-error>
+              Merci de saisir un mot de passe
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="hvr-pulse-grow">Connexion</button>
+        </form>
+        <br>
+        <a href="#">Pas de compte ? cliquez ici</a>
+      </mat-card-content>
+    </mat-card>
 </div>

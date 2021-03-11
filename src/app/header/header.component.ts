@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { BankrollService } from '../services/bankroll.service';
 
 @Component({
@@ -8,7 +10,7 @@ import { BankrollService } from '../services/bankroll.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private serviceBankroll: BankrollService) { }
+  constructor(private serviceBankroll: BankrollService, public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,4 +21,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['login']);
+  }
 }

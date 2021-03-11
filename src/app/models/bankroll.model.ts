@@ -5,6 +5,7 @@ export class Bankroll {
   nom: string;
   description: string;
   objectif: number;
+  miseDepart: number;
   uid: string;
   games: Game[] = [];
 }

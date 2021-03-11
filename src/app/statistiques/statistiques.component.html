@@ -1,2 +1,19 @@
-<app-graphique-lineaire [datagraph]="datagraph"></app-graphique-lineaire>
-<app-chiffres-cle [datachiffre]="datachiffre"></app-chiffres-cle>
+<div class="container">
+  <legend>Bankroll</legend>
+  <app-graphique-lineaire [datagraph]="datagraph" [view]="[1300, 400]" [legend]="true" [firstColor]="'#E44D25'"></app-graphique-lineaire>
+  <app-chiffres-cle [datachiffre]="datachiffre"></app-chiffres-cle>
+  <div class="graph-gains">
+    <div>
+      <legend>Cash Game</legend>
+      <app-graphique-area [datagraph]="datagraphCG" [view]="[800, 300]" [legend]="false" [firstColor]="'#2CFF55'"></app-graphique-area>
+    </div>
+    <div>
+      <legend>Tournois</legend>
+      <app-graphique-area [datagraph]="datagraphTournois" [view]="[800, 300]" [legend]="false" [firstColor]="'#FFF820'"></app-graphique-area>
+    </div>
+    <div>
+      <legend>Expresso</legend>
+      <app-graphique-area [datagraph]="datagraphExpresso" [view]="[800, 300]" [legend]="false" [firstColor]="'#5F43FF'"></app-graphique-area>
+    </div>
+  </div>
+</div>

@@ -1,29 +1,29 @@
+<app-header class="header"></app-header>
 <mat-drawer-container>
   <mat-drawer class="navbar" mode="side" opened>
     <mat-nav-list class="list-navbar">
-
       <a mat-list-item
         [routerLink]="'/bm/bankroll'"
-        routerLinkActive="is-active">Mes bankrolls</a>
+        routerLinkActive="is-active"><mat-icon>home</mat-icon> &nbsp; Mes bankrolls</a>
 
       <a mat-list-item
         [routerLink]="'/bm/games'"
         routerLinkActive="is-active"
-        *ngIf="hasBankrollChoose()">Mes parties</a>
+        *ngIf="hasBankrollChoose()"><mat-icon>star_rate</mat-icon> &nbsp; Mes parties </a>
 
       <a mat-list-item
         [routerLink]="'/bm/stats'"
         routerLinkActive="is-active"
-        *ngIf="hasBankrollChoose()">Statistiques</a>
+        *ngIf="hasBankrollChoose()"><mat-icon>leaderboard</mat-icon> &nbsp; Statistiques</a>
 
         <a mat-list-item
         [routerLink]="'/bm/alerte'"
         routerLinkActive="is-active"
-        *ngIf="hasBankrollChoose()">Alertes</a>
+        *ngIf="false"><mat-icon>notifications</mat-icon> &nbsp; Alertes</a>
 
     </mat-nav-list>
   </mat-drawer>
-  <mat-drawer-content  style="height: 100vh;">
+  <mat-drawer-content  class="matdrawer-style">
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

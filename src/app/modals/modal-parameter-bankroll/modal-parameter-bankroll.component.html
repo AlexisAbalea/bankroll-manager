@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 mat-dialog-title>Paramètre de la bankroll</h1>
+  <div mat-dialog-content class="contenu-dialog">
+    <mat-form-field>
+      <input type="text" matInput placeholder="Titre bankroll" [(ngModel)]="bankrollParam.nom">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <input type="text" matInput placeholder="Description bankroll"  [(ngModel)]="bankrollParam.description">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mise de départ</mat-label>
+      <input type="number" matInput placeholder="Mise de départ" matInput  [(ngModel)]="bankrollParam.miseDepart">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Objectif</mat-label>
+      <input type="number" matInput placeholder="Objectif" matInput  [(ngModel)]="bankrollParam.objectif">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="bouton-action">
+    <div>
+      <button mat-mini-fab color="warn" (click)="supprimerBankroll()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-button (click)="onNoClick()">Annuler</button>
+      <button mat-raised-button [mat-dialog-close]="{data: {bankroll: bankrollParam}}"  color="primary" cdkFocusInitial>Valider</button>
+    </div>
+  </div>
+</div>

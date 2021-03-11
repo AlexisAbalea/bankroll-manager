@@ -1,4 +1,10 @@
+
 @font-face {
-  font-family: "lato";
-  src: url("./Lato-Bold.ttf") format("opentype");
+  font-family: 'halaney';
+  src: url("./Halaney.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'sketchie';
+  src: url("./Sketchies.otf") format("opentype");
 }
